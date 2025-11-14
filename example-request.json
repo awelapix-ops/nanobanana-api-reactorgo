@@ -1,0 +1,205 @@
+{
+  "input": {
+    "workflow": {
+      "2": {
+        "inputs": {
+          "image": "original-51e5be55-e062-43e8-a0e5-48098422f786-2025-09-04.jpg"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "9": {
+        "inputs": {
+          "filename": "bbox/face_yolov8n_v2.pt"
+        },
+        "class_type": "UltralyticsDetectorProvider",
+        "_meta": {
+          "title": "UltralyticsDetectorProvider"
+        }
+      },
+      "10": {
+        "inputs": {
+          "value": 0.5,
+          "bbox_detector": [
+            "9",
+            0
+          ],
+          "image": [
+            "2",
+            0
+          ]
+        },
+        "class_type": "BboxDetectorSEGS",
+        "_meta": {
+          "title": "BboxDetectorSEGS"
+        }
+      },
+      "11": {
+        "inputs": {
+          "segs": [
+            "10",
+            0
+          ]
+        },
+        "class_type": "SegsToCombinedMask",
+        "_meta": {
+          "title": "SegsToCombinedMask"
+        }
+      },
+      "12": {
+        "inputs": {
+          "text": "mask",
+          "images": [
+            "2",
+            0
+          ],
+          "mask": [
+            "11",
+            0
+          ]
+        },
+        "class_type": "D2 Cut By Mask",
+        "_meta": {
+          "title": "D2 Cut By Mask"
+        }
+      },
+      "13": {
+        "inputs": {
+          "images": [
+            "14",
+            0
+          ]
+        },
+        "class_type": "PreviewImage",
+        "_meta": {
+          "title": "PreviewImage"
+        }
+      },
+      "14": {
+        "inputs": {
+          "upscale_model": [
+            "15",
+            0
+          ],
+          "image": [
+            "12",
+            0
+          ]
+        },
+        "class_type": "ImageUpscaleWithModel",
+        "_meta": {
+          "title": "ImageUpscaleWithModel"
+        }
+      },
+      "15": {
+        "inputs": {
+          "model_name": "RealESRGAN_x2.pth"
+        },
+        "class_type": "UpscaleModelLoader",
+        "_meta": {
+          "title": "UpscaleModelLoader"
+        }
+      },
+      "24": {
+        "inputs": {
+          "image": "Monin-watermark-Recovered copy.png"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "Image Overlay"
+        }
+      },
+      "31": {
+        "inputs": {
+          "images": [
+            "45",
+            0
+          ]
+        },
+        "class_type": "PreviewImage",
+        "_meta": {
+          "title": "PreviewImage"
+        }
+      },
+      "32": {
+        "inputs": {
+          "text": "ai_photo_booth",
+          "images": [
+            "33",
+            0
+          ]
+        },
+        "class_type": "Save Image With Callback",
+        "_meta": {
+          "title": "Save Image With Callback"
+        }
+      },
+      "33": {
+        "inputs": {
+          "value": false,
+          "image": [
+            "42",
+            0
+          ],
+          "logo_image": [
+            "24",
+            0
+          ],
+          "mask": [
+            "24",
+            1
+          ]
+        },
+        "class_type": "KimaraAIWatermarker",
+        "_meta": {
+          "title": "KimaraAIWatermarker"
+        }
+      },
+      "42": {
+        "inputs": {
+          "value": true,
+          "input_image": [
+            "45",
+            0
+          ],
+          "source_image": [
+            "14",
+            0
+          ],
+          "options": [
+            "43",
+            0
+          ]
+        },
+        "class_type": "ReActorFaceSwapOpt",
+        "_meta": {
+          "title": "ReActorFaceSwapOpt"
+        }
+      },
+      "43": {
+        "inputs": {
+          "text": "left-right"
+        },
+        "class_type": "ReActorOptions",
+        "_meta": {
+          "title": "ReActorOptions"
+        }
+      },
+      "45": {
+        "inputs": {
+          "text": "both are bodybuilders\n",
+          "images": [
+            "2",
+            0
+          ]
+        },
+        "class_type": "GeminiImageNode",
+        "_meta": {
+          "title": "GeminiImageNode"
+        }
+      }
+    }
+  }
+}
